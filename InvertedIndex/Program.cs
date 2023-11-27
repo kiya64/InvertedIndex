@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -7,25 +9,10 @@ class Program
 {
     static void Main()
     {
+       
 
 
-        //          ادرس کتاب ها 
-        //string textFile = @"C:\Users\kiya\Desktop\1.txt";
-        //string text = File.ReadAllText(textFile);
-        //string textFile2 = @"C:\Users\kiya\Desktop\2.txt";
-        //string text2 = File.ReadAllText(textFile);
-        //string textFile3 = @"C:\Users\kiya\Desktop\3.txt";
-        //string text3 = File.ReadAllText(textFile);
-        //Dictionary<int, string> documents = new Dictionary<int, string>
-        //{
-        //    { 1, text },
-        //    { 2, text2},
-        //    { 3, text3},
-        //};
 
-        //------------------------------------------------
-
-    
         // نمونه ای کوچک
         Dictionary<int, string> documents = new Dictionary<int, string>
         {
@@ -39,7 +26,7 @@ class Program
         // نمایش ایندکس معکوس
         Console.WriteLine("Inverted Index:");
         foreach (var entry in invertedIndex)
-        {  
+        {
             Console.WriteLine($"{entry.Key}: {string.Join(", ", entry.Value)}");
         }
 
@@ -50,7 +37,7 @@ class Program
         int wch = int.Parse(Console.ReadLine());
 
 
-        List<int> result = SearchInvertedIndex(query, invertedIndex,wch);
+        List<int> result = SearchInvertedIndex(query, invertedIndex, wch);
         // مناسب برای تعداد کم 
         Console.WriteLine("\nSearch Result:");
         foreach (var docId in result)
@@ -96,7 +83,7 @@ class Program
         return invertedIndex;
     }
 
-    static List<int> SearchInvertedIndex(string query, Dictionary<string, List<int>> invertedIndex,int wch)
+    static List<int> SearchInvertedIndex(string query, Dictionary<string, List<int>> invertedIndex, int wch)
     {
         string[] terms = query.Split(' ');
 
@@ -112,10 +99,10 @@ class Program
                     {
                         if (invertedIndex.ContainsKey(normalizedTerm))
                         {
-                          
-                                result.AddRange(invertedIndex[normalizedTerm]);
-                            
-                          
+
+                            result.AddRange(invertedIndex[normalizedTerm]);
+
+
                         }
                         else
                         {
@@ -132,11 +119,11 @@ class Program
                         {
                             if (i == 0)
                             {
-                                m=Convert.ToString(item);
+                                m = Convert.ToString(item);
                             }
                             else
                             {
-                            m = m +" "+ Convert.ToString(item);
+                                m = m + " " + Convert.ToString(item);
                             }
                             i++;
                         }
@@ -154,7 +141,7 @@ class Program
 
 
                         var commonElements = z.Intersect(x).ToArray();
-                       
+
                         if (commonElements != null)
                         {
 
@@ -195,15 +182,15 @@ class Program
 
                 }
             case 3:
-  foreach (var term in terms)
-    {
-        string normalizedTerm = NormalizeWord(term);
- 
-        if (invertedIndex.ContainsKey(normalizedTerm))
-        {
-            result.AddRange(invertedIndex[normalizedTerm]);
-        }
-    }
+                foreach (var term in terms)
+                {
+                    string normalizedTerm = NormalizeWord(term);
+
+                    if (invertedIndex.ContainsKey(normalizedTerm))
+                    {
+                        result.AddRange(invertedIndex[normalizedTerm]);
+                    }
+                }
                 List<int> allDocuments = new List<int>();
                 foreach (var entry in invertedIndex)
                 {
@@ -215,14 +202,9 @@ class Program
                 result.Clear();
                 result = notResult.ToList();
                 break;
-
-                result = result.Distinct().ToList();
-
-
-                break;
             default: break;
         }
-      
+
         return result;
     }
     static string NormalizeWord(string word)
